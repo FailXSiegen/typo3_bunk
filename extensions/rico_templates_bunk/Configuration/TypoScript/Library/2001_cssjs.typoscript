@@ -1,0 +1,17 @@
+page {
+    includeCSS {
+        bootstrap = EXT:rico_templates_bunk/Resources/Public/Vendor/bootstrap/dist/css/bootstrap.min.css
+        fancybox = EXT:rico_templates_bunk/Resources/Public/Vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css
+        fontawesome = EXT:rico_templates_bunk/Resources/Public/Vendor/font-awesome/css/font-awesome.min.css
+        animate = EXT:rico_templates_bunk/Resources/Public/Vendor/animate.css/animate.min.css
+        custom = EXT:rico_templates_bunk/Resources/Public/StyleSheet/custom.css
+    }
+
+    includeJSFooterlibs {
+        jquery = EXT:rico_templates_bunk/Resources/Public/Vendor/jquery/dist/jquery.min.js
+        bootstrapJS = EXT:rico_templates_bunk/Resources/Public/Vendor/bootstrap/dist/js/bootstrap.min.js
+        fancybox = EXT:rico_templates_bunk/Resources/Public/Vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js
+        parallax = EXT:rico_templates_bunk/Resources/Public/JavaScript/javascript.parallax.js
+        custom = EXT:rico_templates_bunk/Resources/Public/JavaScript/custom.js
+    }
+}

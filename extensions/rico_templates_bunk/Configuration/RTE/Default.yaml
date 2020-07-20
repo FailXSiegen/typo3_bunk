@@ -1,0 +1,49 @@
+# EXT:my_ext/Configuration/RTE/Default.yaml
+imports:
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Processing.yaml" }
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Base.yaml" }
+  - { resource: "EXT:rte_ckeditor/Configuration/RTE/Editor/Plugins.yaml" }
+
+editor:
+  config:
+    contentsCss: ["EXT:rte_ckeditor/Resources/Public/Css/contents.css"]
+    stylesSet:
+      - { name: "Button", element: "a", attributes: { class: "btn btn-primary"} }
+
+    format_tags: "p;h2;h3;h4;h5;div"
+    toolbarGroups:
+      - { name: clipboard, groups: [clipboard, undo] }
+      - { name: editing,   groups: [find, selection, spellchecker] }
+      - { name: links }
+      - { name: insert }
+      - { name: tools }
+      - { name: table }
+      - { name: tabletools }
+      - { name: document,  groups: [ mode, document, doctools ] }
+      - { name: others }
+      - "/"
+      - { name: basicstyles, groups: [ basicstyles, align, cleanup ] }
+      - { name: paragraph,   groups: [ list, indent, blocks, align, bidi ] }
+      - "/"
+      - { name: styles }
+
+    justifyClasses:
+      - text-left
+      - text-center
+      - text-right
+      - text-justify
+
+    extraPlugins:
+      - justify
+      - font
+      - find
+      - bidi
+
+
+    #RTE default config removes image plugin - restore it:
+    removePlugins:
+      - image
+
+    removeButtons:
+      - Font
+      - FontSize

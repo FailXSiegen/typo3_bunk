@@ -1,0 +1,119 @@
+version: '2.3'
+services:
+  #======================================================
+  # DB
+  #======================================================
+  db:
+    image: mysql:5.7
+    command: mysqld --character-set-server=utf8
+    environment:
+      MYSQL_ROOT_PASSWORD: funcp
+    volumes:
+      - .database:/var/lib/mysql
+  #======================================================
+  # Build
+  #======================================================
+  build:
+    image: composer:1.6.5
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    working_dir: ${ROOT_DIR}
+    command: >
+      /bin/sh -c "
+          composer install;
+      "
+  #======================================================
+  # Lint PHP
+  #======================================================
+  lint-php:
+    image: typo3gmbh/php72:latest
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    working_dir: ${ROOT_DIR}
+    command: >
+      /bin/sh -c "
+          php -v | grep '^PHP';
+          find . -name \\*.php ! -path "./.Build/\\*" -print0 | xargs -0 -n1 -P4 php -n -c /etc/php/cli-no-xdebug/php.ini -l >/dev/null
+      "
+  #======================================================
+  # Lint Typoscript
+  #======================================================
+  lint-typoscript:
+    image: php:${PHP_VERSION}-alpine
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    working_dir: ${ROOT_DIR}
+    command: >
+      /bin/sh -c "
+          .Build/bin/typoscript-lint Configuration/TypoScript/
+          .Build/bin/typoscript-lint Configuration/PageTSconfig/
+      "
+  #======================================================
+  # Quality
+  #======================================================
+  quality:
+    image: php:${PHP_VERSION}-alpine
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    working_dir: ${ROOT_DIR}
+    command: >
+      /bin/sh -c "
+          echo \"Running phpcs...\";
+          .Build/bin/phpcs --error-severity=1 --warning-severity=8 --extensions=php Classes;
+          echo \"Running php-cs-fixer...\";
+          .Build/bin/php-cs-fixer fix --dry-run --diff
+          echo \"Running phpmd...\";
+          .Build/bin/phpmd Classes text phpmd.xml;
+          echo \"Running phpstan...\";
+          .Build/bin/phpstan analyse -c phpstan.neon --autoload-file=.Build/vendor/autoload.php -l max Classes
+      "
+  #======================================================
+  # Debug usage call check
+  #======================================================
+  debugUsageCallCheck:
+    image: php:${PHP_VERSION}-alpine
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    working_dir: ${ROOT_DIR}
+    command: >
+      /bin/sh -c "
+          if grep -rnw "Resources/Private/" "Classes/" -e "debug" -e "DebuggerUtility"; then
+            exit 1
+          fi
+      "
+  #======================================================
+  # Functional tests
+  #======================================================
+  functional:
+    image: riconet/typo3:9.5
+    links:
+      - db
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    environment:
+      typo3DatabaseName: func_test
+      typo3DatabaseUsername: root
+      typo3DatabasePassword: funcp
+      typo3DatabaseHost: db
+    working_dir: ${ROOT_DIR}/.Build
+    command: >
+      /bin/sh -c "
+          echo Waiting for database start...;
+          while ! nc -z db 3306; do
+              sleep 1;
+          done;
+          echo Database is up;
+          php bin/phpunit -c vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml ${EXTRA_TEST_OPTIONS} ${TEST_FILE};
+      "
+  #======================================================
+  # Unit tests
+  #======================================================
+  unit:
+    image: riconet/typo3:9.5
+    volumes:
+      - ${ROOT_DIR}:${ROOT_DIR}
+    working_dir: ${ROOT_DIR}/.Build
+    command: >
+      /bin/sh -c "
+          php bin/phpunit -c vendor/nimut/testing-framework/res/Configuration/UnitTests.xml ${EXTRA_TEST_OPTIONS} ${TEST_FILE};
+      "

@@ -1,0 +1,12 @@
+yarn.lock
+Resources/Public/Vendor/
+composer.lock
+vendor/
+typo3/
+index.php
+yarn-error.log
+.idea/
+.Build/
+.ci/docker/.env
+.ci/docker/.database
+.php_cs.cache

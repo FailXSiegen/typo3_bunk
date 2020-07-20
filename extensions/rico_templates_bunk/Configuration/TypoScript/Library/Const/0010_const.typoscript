@@ -1,0 +1,28 @@
+plugin {
+    tx_ricotemplates_bunk {
+        settings {
+            # cat=plugin.tx_ricotemplates_bunk/basic/2; type=string; label=Root page id
+            rootPageUid =
+            # cat=plugin.tx_ricotemplates_bunk/basic/3; type=string; label=Main Navigation Path
+            mainNavPageUid =
+            # cat=plugin.tx_ricotemplates_bunk/basic/4; type=string; label=Top Navigation Path
+            headerNavPageUid =
+            # cat=plugin.tx_ricotemplates_bunk/basic/5; type=string; label=Footer Navigation Path
+            footerNavPageUid =
+            # cat=plugin.tx_ricotemplates_bunk/basic/11; type=string; label=CTA Navigation path id
+            ctaNavPageUid =
+            # cat=plugin.tx_ricotemplates_bunk/basic/12; type=string; label=Logo path
+            logoPath =
+            # cat=plugin.tx_ricotemplates_bunk/basic/13; type=string; label=Slogan path
+            sloganPath =
+        }
+    }
+}
+
+page {
+    fluidtemplate {
+        layoutRootPath = EXT:rico_templates_bunk/Resources/Private/Layouts/Page/
+        partialRootPath = EXT:rico_templates_bunk/Resources/Private/Partials/Page/
+        templateRootPath = EXT:rico_templates_bunk/Resources/Private/Templates/Page/
+    }
+}

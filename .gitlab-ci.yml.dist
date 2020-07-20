@@ -1,0 +1,83 @@
+#======================================================
+# Variables
+#======================================================
+variables:
+    DEV_URL: https://
+#======================================================
+# Stages
+#======================================================
+stages:
+    - pre_tests
+    - deploy
+    - post_tests
+#======================================================
+# Pre tests
+#======================================================
+composer_test:
+    image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+    stage: pre_tests
+    script:
+        - composer validate
+    only:
+        - merge_requests
+#======================================================
+# Deployment
+#======================================================
+deployment:
+    image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+    stage: deploy
+    only:
+        - master
+    cache:
+        key: "$CI_COMMIT_REF_SLUG"
+        paths:
+            - vendor/
+    before_script:
+        - 'which ssh-agent || ( apk --no-cache add openssh-client )'
+        - eval $(ssh-agent -s)
+        - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+        - chmod 644 ~/.ssh/known_hosts
+        - composer global require -q --dev deployer/deployer:~6.4 deployphp/recipes:~6.2
+    script:
+        - /home/php/.composer/vendor/bin/dep deploy prod
+#======================================================
+# Post test
+#======================================================
+acceptance:
+    image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+    stage: post_tests
+    before_script:
+        - wget https://codeception.com/codecept.phar
+        - chmod +x codecept.phar
+        - sed 's#_DEV_URL_#'"$DEV_URL"'#' params.yml.dist > params.yaml
+    script:
+        - ./codecept.phar run --skip Integration --steps
+    only:
+        - master
+    services:
+        -   name: selenium/standalone-chrome:latest
+            alias: chrome
+    artifacts:
+        paths:
+            - var/tests
+        expire_in: 30 minutes
+
+acceptance_side_runner:
+    image: nixel2007/docker-selenium-side-runner
+    stage: post_tests
+    before_script:
+        - mkdir -p var/tests
+    script:
+        - selenium-side-runner --server http://chrome:4444/wd/hub --base-url $DEV_URL --output-directory var/tests tests/Acceptance/Sides/*.side
+    only:
+        - master
+    services:
+        -   name: selenium/standalone-chrome:latest
+            alias: chrome
+    artifacts:
+        paths:
+            - var/tests
+        expire_in: 30 minutes

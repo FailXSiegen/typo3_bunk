@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "animate.css": "^4.1.0",
+    "bootstrap": "^4.5.0",
+    "fancybox": "^3.0.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3"
+  }
+}

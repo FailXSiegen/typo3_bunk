@@ -1,0 +1,79 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <f:spaceless>
+        <f:switch expression="{data.layout}">
+            <f:comment>
+                Container erzwingen
+            </f:comment>
+            <f:case value="1">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'4',pb:'4',classname:'container'}" />
+            </f:case>
+
+            <f:comment>
+                Container Fluid - Volle Breite mit Innenabstand
+            </f:comment>
+            <f:case value="2">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:'container-fluid'}" />
+            </f:case>
+            <f:comment>
+                Container Fluid - Volle Breite ohne Innenabstand
+            </f:comment>
+            <f:case value="3">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:'container-fluid p-0'}" />
+            </f:case>
+            <f:comment>
+                Keine Ummantelung
+            </f:comment>
+            <f:case value="4">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'4',pb:'4',classname:''}" />
+            </f:case>
+            <f:comment>
+                Orientierung oben
+            </f:comment>
+            <f:case value="5">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:'align-self-start'}" />
+            </f:case>
+            <f:comment>
+                Orientierung mitte
+            </f:comment>
+            <f:case value="6">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:'align-self-center'}" />
+            </f:case>
+            <f:comment>
+                Orientierung unten
+            </f:comment>
+            <f:case value="7">
+                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:'align-self-end'}" />
+            </f:case>
+            <f:defaultCase>
+
+                <f:comment>
+                    Wenn Element ein Child Element von einem FCE ist, dann ohne Container
+                </f:comment>
+                <f:if condition="{data.tx_gridelements_container} > 0">
+                    <f:then>
+
+                        <f:switch expression="{f:cObject(typoscriptObjectPath:'lib.getLayoutFromElement',data:'{data.tx_gridelements_container}')}">
+                            <f:case value="2">
+                                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'4',pb:'4',classname:'container'}" />
+                            </f:case>
+                            <f:case value="3">
+                                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'4',pb:'4',classname:'container'}" />
+                            </f:case>
+                            <f:defaultCase>
+
+                                <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:' '}" />
+                            </f:defaultCase>
+                        </f:switch>
+                    </f:then>
+                    <f:else>
+                        <f:render section="defaultContainer" arguments="{data:'{data}',pt:'0',pb:'0',classname:'container'}" />
+                    </f:else>
+                </f:if>
+            </f:defaultCase>
+        </f:switch>
+    </f:spaceless>
+    <f:section name="defaultContainer">
+        {data.frame_class} {classname} frame-type-{data.CType} frame-layout-{data.layout} {f:if(condition:'{data.animatecss}',then:'invisible animatecss')} {f:if(condition:'{data.imageborder}',then:' imageshadow')} {f:if(condition:'{data.imageroundcorners}',then:' imageroundcorners')} {f:if(condition:'{data.space_before_class} != \'\'', then: ' pt-{data.space_before_class}', else: ' pt-{pt}')}{f:if(condition:'{data.space_after_class} != \'\'', then: ' pb-{data.space_after_class}', else: ' pb-{pb}')}
+    </f:section>
+</html>

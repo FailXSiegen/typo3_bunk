@@ -1,0 +1,11 @@
+User-Agent: *
+Allow: /
+
+Disallow: /typo3/
+Disallow: /typo3conf/
+Allow: /typo3conf/ext/
+Allow: /typo3temp/
+
+Disallow: /*?id=*
+Disallow: /*cHash
+Disallow: /*tx_powermail_pi1

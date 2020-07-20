@@ -1,0 +1,34 @@
+lib {
+    contentElement {
+        templateRootPaths {
+            20 = EXT:rico_templates_bunk/Resources/Private/Extensions/FluidStyledContent/Templates/
+        }
+
+        partialRootPaths {
+            20 = EXT:rico_templates_bunk/Resources/Private/Extensions/FluidStyledContent/Partials/
+        }
+
+        layoutRootPaths {
+            20 = EXT:rico_templates_bunk/Resources/Private/Extensions/FluidStyledContent/Layouts/
+        }
+    }
+
+    fluidContent < .contentElement
+
+    getLayoutFromElement = COA
+    getLayoutFromElement {
+        5 = LOAD_REGISTER
+        5 {
+            contentUid = TEXT
+            contentUid.current = 1
+        }
+
+        20 = TEXT
+        20 {
+            data = DB:tt_content:{register:contentUid}:layout
+            data.insertData = 1
+        }
+
+        90 = RESTORE_REGISTER
+    }
+}

@@ -1,0 +1,25 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:v="http://typo3.org/ns/FluidTYPO3/Vhs/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <div id="c{data.uid}" class="{f:render(partial:'Divclasses',arguments:'{data: data}')}">
+        <div class="panel-group accordion" id="accordion-{data.uid}">
+            <f:for each="{children.1.101}" as="item" iteration="iterator">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle d-block w-100 py-2 collapsed" data-toggle="collapse" data-parent="#accordion-{data.uid}" href="#panel-{data.uid}-{iterator.index}" aria-expanded="false">
+                                {item.data.header}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="panel-{data.uid}-{iterator.index}" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                        <div class="panel-body">
+                            <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos:'-1',pageUid:'{item.data.pid}',contentUids:'{item.data.uid}'}" />
+                        </div>
+                    </div>
+                </div>
+
+            </f:for>
+        </div>
+    </div>
+</html>

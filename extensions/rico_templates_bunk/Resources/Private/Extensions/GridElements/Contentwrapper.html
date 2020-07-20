@@ -1,0 +1,37 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <div id="c{data.uid}"
+         {f:if(condition:'{data.animatecss}', then:' data-animatecss="{data.animatecss}"',else:'')}
+    class="{f:if(condition:data.flexform_rowClasses,then:'d-flex')}  {data.flexform_rowClasses} {data.flexform_maxWidthContent} {f:if(condition:files,then:'bgimage overflow-hidden position-relative')} {data.flexform_textcolor} {f:render(partial:'Divclasses',arguments:'{data: data}')}">
+    <f:for each="{children.1.101}" as="item" iteration="iterator">
+        <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos:'-1',pageUid:'{item.data.pid}',contentUids:'{item.data.uid}'}" />
+    </f:for>
+    <f:if condition="{files}">
+        <f:variable name="parallaxoptions" value="{f:if(condition:data.parallaxoption, then:'{data.parallaxoption}', else:'-0.15')},visible" />
+        <f:variable name="parallax" value="{f:if(condition:data.parallax, then:'data-parallax={parallaxoptions}', else:'')}" />
+        <div  {parallax}
+              class="bgimageitem {f:if(condition:'{data.parallax}',then:'parallax')} position-absolute text-center w-100 h-100">
+            <picture>
+                <source media="(max-width: 767px) and (orientation:portrait)"
+                        srcset="{f:uri.image(src:'{files.0.uid}',treatIdAsReference:'1',width:'767m',cropVariant:'smartphone-portrait')}">
+                <source media="(max-width: 767px) and (orientation:landscape)"
+                        srcset="{f:uri.image(src:'{files.0.uid}',treatIdAsReference:'1',width:'767m',cropVariant:'smartphone-landscape')}">
+                <source media="(max-width: 991px) and (orientation:portrait)"
+                        srcset="{f:uri.image(src:'{files.0.uid}',treatIdAsReference:'1',width:'991m',cropVariant:'tablet-portrait')}">
+                <source media="(max-width: 991px) and (orientation:landscape)"
+                        srcset="{f:uri.image(src:'{files.0.uid}',treatIdAsReference:'1',width:'991m',cropVariant:'tablet-landscape')}">
+                <source media="(max-width: 1199px) and (min-width:992px)"
+                        srcset="{f:uri.image(src:'{files.0.uid}',treatIdAsReference:'1',maxWidth:'1200',cropVariant:'desktop-md')}">
+                <source media="(min-width: 1600px)"
+                        srcset="{f:uri.image(src:'{files.0.uid}',treatIdAsReference:'1',cropVariant:'default')}">
+                <f:image treatIdAsReference="1"
+                         class="img w-auto w-lg-100 h-auto"
+                         src="{files.0.uid}"
+                         title="{files.0.title}"
+                         alt="{files.0.alternative}"
+                         crop="{files.0.crop}" />
+            </picture>
+        </div>
+    </f:if>
+    </div>
+</html>

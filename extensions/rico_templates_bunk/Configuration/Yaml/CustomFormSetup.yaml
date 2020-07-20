@@ -1,0 +1,20 @@
+TYPO3:
+  CMS:
+    Form:
+      persistenceManager:
+        allowedExtensionPaths:
+          20: EXT:rico_templates_bunk/Resources/Private/Extensions/Form/Yaml/
+        allowSaveToExtensionPaths: true
+        allowDeleteFromExtensionPaths: true
+
+      prototypes:
+        standard:
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                templateRootPaths:
+                  100: 'EXT:rico_templates_bunk/Resources/Private/Extensions/form/Frontend/Templates/'
+                partialRootPaths:
+                  100: 'EXT:rico_templates_bunk/Resources/Private/Extensions/form/Frontend/Partials/'
+                layoutRootPaths:
+                  100: 'EXT:rico_templates_bunk/Resources/Private/Extensions/form/Frontend/Layouts/'

@@ -1,0 +1,2 @@
+<INCLUDE_TYPOSCRIPT: source="DIR: ./Library" extensions="typoscript">
+<INCLUDE_TYPOSCRIPT: source="DIR: ./Helper" extensions="typoscript">

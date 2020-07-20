@@ -1,0 +1,121 @@
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .Build/
+
+stages:
+  - build
+  - quality
+  - test
+
+composer:
+  image: composer:1.6.5
+  stage: build
+  script:
+    - composer -q -n install
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - .Build/
+  only:
+    - merge_requests
+    - master
+
+lint-php:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - php -v | grep '^PHP';
+    - find . -name \\*.php ! -path "./.Build/\\*" -print0 | xargs -0 -n1 -P4 php -n -c /etc/php/cli-no-xdebug/php.ini -l >/dev/null;
+  only:
+    - merge_requests
+    - master
+
+lint-typoscript:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - .Build/bin/typoscript-lint Configuration/TypoScript/
+    - .Build/bin/typoscript-lint Configuration/PageTSconfig/
+  only:
+    - merge_requests
+    - master
+  allow_failure: true
+
+phpstan:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - .Build/bin/phpstan analyse -c phpstan.neon -l max Classes
+  only:
+    - merge_requests
+    - master
+  allow_failure: true
+
+codesniffer:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - .Build/bin/phpcs --error-severity=1 --warning-severity=8 --extensions=php Classes
+  only:
+    - merge_requests
+    - master
+  allow_failure: true
+
+php-cs-fixer:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - .Build/bin/php-cs-fixer fix --dry-run --diff
+  only:
+    - merge_requests
+    - master
+
+phpmd:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - .Build/bin/phpmd Classes text phpmd.xml
+  only:
+    - merge_requests
+    - master
+  allow_failure: true
+
+debug_call_usages:
+  image: php:7.2-alpine
+  stage: quality
+  script:
+    - |
+      if grep -rnw "Resources/Private/" "Classes/" -e "debug" -e "DebuggerUtility"
+      then
+         exit 1;
+      fi
+  only:
+    - merge_requests
+    - master
+
+unittests:
+  image: riconet/typo3:9.5
+  stage: test
+  script:
+    .Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml "" .Build/Web/typo3conf/ext/${CI_PROJECT_NAME}/Tests/Unit
+  only:
+    - merge_requests
+    - master
+
+functionaltests:
+  image: riconet/typo3:9.5
+  stage: test
+  variables:
+    MYSQL_ROOT_PASSWORD: funcp
+    typo3DatabaseName: func_test
+    typo3DatabaseUsername: root
+    typo3DatabasePassword: funcp
+    typo3DatabaseHost: mariadb
+  services:
+    - mariadb:10
+  script:
+    .Build/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml "" .Build/Web/typo3conf/ext/${CI_PROJECT_NAME}/Tests/Functional
+  only:
+    - merge_requests
+    - master

@@ -1,0 +1,61 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+    <header id="head">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="navbar-header navbar-expand-lg">
+                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                                data-target="#navwrap" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="icon-bar top-bar"></span>
+                            <span class="icon-bar middle-bar "></span>
+                            <span class="icon-bar bottom-bar"></span>
+                        </button>
+                        <f:if condition="{logoPath}">
+                            <div itemscope itemtype="http://schema.org/Organization">
+                                <f:link.typolink parameter="{rootPageUid}" additionalAttributes="{'itemprop':'url'}">
+                                    <f:image src="{logoPath}"
+                                             width="120m"
+                                             class="logo img img-fluid"
+                                             alt="Bunk Ihr Partner für Grün GmbH " />
+                                </f:link.typolink>
+                                <f:if condition="{sloganPath}">
+                                    <f:image src="{sloganPath}"
+                                             class="slogan img img-fluid"
+                                             alt="Bunk Ihr Partner für Grün GmbH" />
+                                </f:if>
+                            </div>
+                        </f:if>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                    <nav id="nav" class="navbar navbar-expand-lg" itemscope
+                         itemtype="http://schema.org/SiteNavigationElement">
+                        <div class="collapse navbar-collapse" id="navwrap">
+                            <ul class="nav navbar-nav nav-tabs">
+                                <f:for each="{mainNavigation}" as="menu">
+                                    <li class="nav-item dropdown l1 layout-{menu.layout}" itemprop="name">
+                                        <a class="col-md-9 col-sm-9 col-9"
+                                           href="{menu.link}"
+                                           {f:if(condition:menu.target,then: 'target="{menu.target}"')}
+                                        itemprop="url"
+                                        title="{menu.title}">
+                                        {menu.title}
+                                        </a>
+                                    </li>
+                                </f:for>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <f:variable name="headercontent" value="{f:cObject(typoscriptObjectPath: 'lib.dynamicContent',data: '{colPos: \'1\'}')}" />
+    <f:if condition="{headercontent}">
+        <div class="head-content">
+            {headercontent -> f:format.raw()}
+        </div>
+    </f:if>
+</html>

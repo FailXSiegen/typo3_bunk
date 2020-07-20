@@ -1,0 +1,7 @@
+plugin.tx_form.settings.yamlConfigurations {
+    100 = EXT:rico_templates_bunk/Configuration/Yaml/CustomFormSetup.yaml
+}
+
+module.tx_form.settings.yamlConfigurations {
+    100 = EXT:rico_templates_bunk/Configuration/Yaml/CustomFormSetup.yaml
+}

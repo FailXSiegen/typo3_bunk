@@ -1,0 +1,416 @@
+RTE {
+    default.preset = riconet
+    classesAnchor {
+        download {
+            titleText >
+            image >
+        }
+
+        externalLink {
+            titleText >
+            image >
+        }
+
+        externalLinkInNewWindow {
+            titleText >
+            image >
+        }
+
+        internalLink {
+            titleText >
+            image >
+        }
+
+        internalLinkInNewWindow {
+            titleText >
+            image >
+        }
+
+        mail {
+            titleText >
+            image >
+        }
+    }
+}
+
+mod {
+    web_layout {
+        BackendLayouts {
+            default {
+                title = Default
+                config {
+                    backend_layout {
+                        colCount = 1
+                        rowCount = 3
+                        rows {
+                            1 {
+                                columns {
+                                    1 {
+                                        name = Header
+                                        colPos = 1
+                                    }
+                                }
+                            }
+
+                            2 {
+                                columns {
+                                    1 {
+                                        name = Content
+                                        colPos = 0
+                                    }
+                                }
+                            }
+
+                            3 {
+                                columns {
+                                    1 {
+                                        name = Footer
+                                        colPos = 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+tx_gridelements.setup {
+    accordion {
+        title = Accordion
+        config {
+            colCount = 1
+            rowCount = 1
+            rows {
+                1 {
+                    columns {
+                        1 {
+                            name = Content
+                            colPos = 101
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    contentwrapper {
+        title = Content Wrapper
+        config {
+            colCount = 1
+            rowCount = 1
+            rows {
+                1 {
+                    columns {
+                        1 {
+                            name = Content
+                            colPos = 101
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    contentslider {
+        title = Content Slider
+        config {
+            colCount = 1
+            rowCount = 1
+            rows {
+                1 {
+                    columns {
+                        1 {
+                            name = Content
+                            colPos = 101
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    2cols {
+        title = Two Columns
+        config {
+            colCount = 2
+            rowCount = 1
+            rows {
+                1 {
+                    columns {
+                        1 {
+                            name = Left
+                            colPos = 101
+                        }
+
+                        2 {
+                            name = Right
+                            colPos = 102
+                        }
+                    }
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:rico_templates_bunk/Configuration/FlexForm/flexform_2col.xml
+    }
+
+    3cols {
+        title = Three Columns
+        config {
+            colCount = 3
+            rowCount = 1
+            rows {
+                1 {
+                    columns {
+                        1 {
+                            name = Left
+                            colPos = 101
+                        }
+
+                        2 {
+                            name = Middle
+                            colPos = 102
+                        }
+
+                        3 {
+                            name = Right
+                            colPos = 103
+                        }
+                    }
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:rico_templates_bunk/Configuration/FlexForm/flexform_3col.xml
+    }
+
+    4cols {
+        title = Four Columns
+        config {
+            colCount = 4
+            rowCount = 1
+            rows {
+                1 {
+                    columns {
+                        1 {
+                            name = Left
+                            colPos = 101
+                        }
+
+                        2 {
+                            name = Middle-left
+                            colPos = 102
+                        }
+
+                        3 {
+                            name = Middle-right
+                            colPos = 103
+                        }
+
+                        4 {
+                            name = Right
+                            colPos = 104
+                        }
+                    }
+                }
+            }
+        }
+
+        flexformDS = FILE:EXT:rico_templates_bunk/Configuration/FlexForm/flexform_4col.xml
+    }
+
+}
+
+TCEFORM {
+    tt_content {
+        layout {
+            altLabels {
+                1 = Feste Breite
+                2 = Volle Breite mit Innenabstand
+                3 = Volle Breite ohne Innenabstand
+            }
+
+            addItems {
+                4 = Keine Ummantelung
+                5 = Orientierung oben
+                6 = Orientierung mitte
+                7 = Orientierung unten
+            }
+        }
+
+        frame_class {
+            removeItems = ruler-before,ruler-after,indent,indent-left,indent-right
+        }
+
+        space_before_class {
+            removeItems = extra-small,small,medium,large,extra-large
+            addItems {
+                0 = 0
+                1 = 1
+                2 = 2
+                3 = 3
+                4 = 4
+                5 = 5
+                6 = 6
+                7 = 7
+                8 = 8
+                9 = 9
+                10 = 10
+                11 = 11
+                12 = 12
+                13 = 13
+                14 = 14
+                15 = 15
+            }
+        }
+
+        space_after_class {
+            removeItems = extra-small,small,medium,large,extra-large
+            addItems {
+                0 = 0
+                1 = 1
+                2 = 2
+                3 = 3
+                4 = 4
+                5 = 5
+                6 = 6
+                7 = 7
+                8 = 8
+                9 = 9
+                10 = 10
+                11 = 11
+                12 = 12
+                13 = 13
+                14 = 14
+                15 = 15
+            }
+        }
+
+        subheader {
+            disabled = 0
+        }
+
+        header_layout {
+            altLabels {
+                0 = Default
+                1 = H1
+                2 = H2
+                3 = H3
+                4 = H4
+                5 = H5
+                100 = Verborgen
+            }
+
+            addItems {
+                6 = H1 class
+                7 = H2 class
+                8 = H3 class
+                9 = H4 class
+                10 = H5 class
+            }
+        }
+    }
+
+    sys_file_reference.crop.config.cropVariants {
+        default {
+            title = Desktop >= 1400px
+            selectedRatio = NaN
+            allowedAspectRatios {
+                21_5 {
+                    title = 21:5
+                    value = 4.2
+                }
+
+                3_1 {
+                    title = 3:1
+                    value = 3
+                }
+
+                21_9 {
+                    title = 21:9
+                    value = 2.33333
+                }
+
+                16_10 {
+                    title = 16:10
+                    value = 1.6
+                }
+
+                16_9 {
+                    title = 16:9
+                    value = 1.77777
+                }
+
+                3_2 {
+                    title = 3:2
+                    value = 1.5
+                }
+
+                4_3 {
+                    title = 4:3
+                    value = 1.33333
+                }
+
+                1_1 {
+                    title = 1:1
+                    value = 1
+                }
+
+                3_4 {
+                    title = 3:4
+                    value = .75
+                }
+
+                NaN {
+                    title = free
+                    value = 0.0
+                }
+            }
+        }
+
+        desktop-md {
+            title = Desktop < 1400px
+            selectedRatio = NaN
+            allowedAspectRatios < TCEFORM.sys_file_reference.crop.config.cropVariants.default.allowedAspectRatios
+        }
+
+        tablet-portrait {
+            title = Tablet - Portrait
+            selectedRatio = NaN
+            allowedAspectRatios < TCEFORM.sys_file_reference.crop.config.cropVariants.default.allowedAspectRatios
+        }
+
+        tablet-landscape {
+            title = Tablet - Landscape
+            selectedRatio = NaN
+            allowedAspectRatios < TCEFORM.sys_file_reference.crop.config.cropVariants.default.allowedAspectRatios
+        }
+
+        smartphone-portrait {
+            title = Smartphone - Portrait
+            selectedRatio = NaN
+            allowedAspectRatios < TCEFORM.sys_file_reference.crop.config.cropVariants.default.allowedAspectRatios
+        }
+
+        smartphone-landscape {
+            title = Smartphone - Landscape
+            selectedRatio = NaN
+            allowedAspectRatios < TCEFORM.sys_file_reference.crop.config.cropVariants.default.allowedAspectRatios
+        }
+    }
+}
+
+TCEMAIN {
+    permissions {
+        groupid = 1
+        user = show, editcontent, edit, new, delete
+        group = show, editcontent, edit, new, delete
+        everybody = show, editcontent, edit, new
+    }
+}

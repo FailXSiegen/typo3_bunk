@@ -1,0 +1,80 @@
+{
+    "name": "riconet/t3-project-bunk",
+    "description": "",
+    "license": "GPL-3.0-or-later",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://composer.typo3.org/"
+        },
+        {
+            "type": "path",
+            "url": "extensions/*",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "composer",
+            "url": "https://composer.riconnect.de/"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.2"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "typo3/cms-backend": "^10.4",
+        "typo3/cms-core": "^10.4",
+        "typo3/cms-extbase": "^10.4",
+        "typo3/cms-extensionmanager": "^10.4",
+        "typo3/cms-filelist": "^10.4",
+        "typo3/cms-fluid": "^10.4",
+        "typo3/cms-frontend": "^10.4",
+        "typo3/cms-install": "^10.4",
+        "typo3/cms-recordlist": "^10.4",
+        "typo3/cms-about": "^10.4",
+        "typo3/cms-belog": "^10.4",
+        "typo3/cms-beuser": "^10.4",
+        "typo3/cms-felogin": "^10.4",
+        "typo3/cms-fluid-styled-content": "^10.4",
+        "typo3/cms-form": "^10.4",
+        "typo3/cms-impexp": "^10.4",
+        "typo3/cms-info": "^10.4",
+        "typo3/cms-rte-ckeditor": "^10.4",
+        "typo3/cms-setup": "^10.4",
+        "typo3/cms-seo": "^10.4",
+        "typo3/cms-sys-note": "^10.4",
+        "typo3/cms-t3editor": "^10.4",
+        "typo3/cms-tstemplate": "^10.4",
+        "typo3/cms-viewpage": "^10.4",
+        "typo3/cms-redirects": "^10.4",
+        "typo3/cms-lowlevel": "^10.4",
+        "typo3/cms-recycler": "^10.4",
+        "helhum/typo3-console": "^6.3",
+        "helhum/dotenv-connector": "^2.3",
+        "gridelementsteam/gridelements": "^10.0",
+		"riconet/t3-internal-extension-templates-bunk": "@dev"
+	},
+    "require-dev": {
+        "typo3/testing-framework": "^6.3",
+        "codeception/codeception": "^4.0",
+        "codeception/module-webdriver": "^1.0",
+        "codeception/module-db": "^1.0",
+        "jigal/t3adminer": "9.4.1"
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "web-dir": "public"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "vendor/bin/typo3cms install:fixfolderstructure",
+            "vendor/bin/typo3cms install:generatepackagestates"
+        ]
+    }
+}

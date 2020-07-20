@@ -1,0 +1,26 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+  <picture>
+        <source media="(max-width: 767px) and (orientation:portrait)"
+                srcset="{f:uri.image(src:'{file.uid}',treatIdAsReference:'1',width:'{f:if(condition: \'{dimensions.width} > 767\',then:\'767m\',else:\'{dimensions.width}\')}',cropVariant:'smartphone-portrait')}">
+        <source media="(max-width: 767px) and (orientation:landscape)"
+                srcset="{f:uri.image(src:'{file.uid}',treatIdAsReference:'1',width:'{f:if(condition: \'{dimensions.width} > 767\',then:\'767m\',else:\'{dimensions.width}\')}',cropVariant:'smartphone-landscape')}">
+        <source media="(max-width: 991px) and (orientation:portrait)"
+                srcset="{f:uri.image(src:'{file.uid}',treatIdAsReference:'1',width:'{f:if(condition: \'{dimensions.width} > 991\',then:\'991m\',else:\'{dimensions.width}\')}',cropVariant:'tablet-portrait')}">
+        <source media="(max-width: 991px) and (orientation:landscape)"
+                srcset="{f:uri.image(src:'{file.uid}',treatIdAsReference:'1',width:'{f:if(condition: \'{dimensions.width} > 991\',then:\'991m\',else:\'{dimensions.width}\')}',cropVariant:'tablet-landscape')}">
+        <source media="(max-width: 1399px) and (min-width:992px)"
+                srcset="{f:uri.image(src:'{file.uid}',treatIdAsReference:'1',width:'{f:if(condition: \'{dimensions.width} > 1200\',then:\'1200m\',else:\'{dimensions.width}\')}',cropVariant:'desktop-md')}">
+        <source media="(min-width: 1400px)"
+                srcset="{f:uri.image(src:'{file.uid}',treatIdAsReference:'1',width:'{f:if(condition: \'{dimensions.width} > 1920\',then:\'1920m\',else:\'{dimensions.width}\')}',cropVariant:'default')}">
+        <f:image treatIdAsReference="1"
+                 class="image-embed-item  img img-fluid"
+                 loading="lazy"
+                 width="{dimensions.width}"
+                 height="{dimensions.height}"
+                 src="{file.uid}"
+                 title="{file.title}"
+                 alt="{file.alternative}"
+                 crop="{file.crop}" />
+    </picture>
+</html>

@@ -1,0 +1,45 @@
+version: '2.3'
+services:
+    #======================================================
+    # Acceptance
+    #======================================================
+    acceptance:
+        image: edbizarro/gitlab-ci-pipeline-php:7.2-alpine
+        links:
+            - chrome
+        volumes:
+            - ${ROOT_DIR}:${ROOT_DIR}
+        working_dir: ${ROOT_DIR}
+        command: >
+            /bin/sh -c "vendor/bin/codecept run ${EXTRA_TEST_OPTIONS} --steps"
+    #======================================================
+    # Selenium Side runner
+    #======================================================
+    selenium_side_runner:
+        image: nixel2007/docker-selenium-side-runner
+        links:
+            - chrome
+        volumes:
+            - ${ROOT_DIR}:${ROOT_DIR}
+        working_dir: ${ROOT_DIR}
+        command: >
+            /bin/sh -c "
+                selenium-side-runner -s http://chrome:4444/wd/hub \
+                    --output-directory var/tests \
+                    --base-url http://typo3 \
+                    tests/Acceptance/Sides/*.side
+            "
+    #======================================================
+    # Selenium - Chrome
+    #======================================================
+    chrome:
+        image: selenium/standalone-chrome:latest
+        ports:
+            - 4444:4444
+#======================================================
+# Networks
+#======================================================
+networks:
+    default:
+        external:
+            name: local_development

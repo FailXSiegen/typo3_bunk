@@ -1,0 +1,28 @@
+paths:
+    tests: tests/Acceptance
+    output: var/tests
+    data: tests/Acceptance/.
+    support: tests/Acceptance/Support
+actor_suffix: Tester
+extensions:
+    enabled:
+        - Codeception\Extension\RunFailed
+        - Codeception\Extension\Recorder
+params:
+    - params.yml
+modules:
+    config:
+        PhpBrowser:
+            url: "%ACCEPTANCE_TESTS_BASE_URL%"
+            clear_cookies: false
+            restart: false
+            curl:
+                CURLOPT_RETURNTRANSFER: true
+        WebDriver:
+            browser: chrome
+            url: "%ACCEPTANCE_TESTS_BASE_URL%"
+            host: "%SELENIUM_HOST%"
+        Db:
+            dsn: "mysql:host=%TYPO3_DB_HOST%:%TYPO3_DB_PORT%;dbname=%TYPO3_DB_NAME%"
+            user: "%TYPO3_DB_USER%"
+            password: "%TYPO3_DB_PASSWORD%"

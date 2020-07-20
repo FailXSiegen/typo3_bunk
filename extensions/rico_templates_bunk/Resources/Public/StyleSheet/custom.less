@@ -1,0 +1,168 @@
+@import "_variables";
+@import "_functions";
+@import url('https://fonts.googleapis.com/css?family=Oxygen|Abel&display=swap');
+
+
+.w {
+  &-lg {
+    &-100 {
+      @media(min-width: 992px) {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+
+@range: 6, 7, 8, 9, 10, 11, 12, 13, 14, 15;
+.p {
+  .for(@range);
+  .-each(@value) {
+    @space: (@value/2+0.5);
+    &t-@{value} {
+      padding-top: ~"@{space}rem" !important;
+    }
+    &b-@{value} {
+      padding-bottom: ~"@{space}rem" !important;
+    }
+    &l-@{value} {
+      padding-left: ~"@{space}rem" !important;
+    }
+    &r-@{value} {
+      padding-right: ~"@{space}rem" !important;
+    }
+    &y-@{value} {
+      padding-top: ~"@{space}rem" !important;
+      padding-bottom: ~"@{space}rem" !important;
+    }
+    &x-@{value} {
+      padding-left: ~"@{space}rem" !important;
+      padding-right: ~"@{space}rem" !important;
+    }
+  }
+}
+.cl {
+  &fo- {
+    .for(@colors);
+    .-each(@value) {
+      @name: extract(@value, 1);
+      &@{name} {
+        color: extract(@value, 2);
+      }
+    }
+  }
+
+  &bg- {
+    .for(@colors);
+    .-each(@value) {
+      @name: extract(@value, 1);
+      &@{name} {
+        background-color: extract(@value, 2);
+      }
+    }
+  }
+}
+.bgimage {
+  background-size: cover;
+  background-position: 50% 50%;
+  position: relative;
+
+  &.cl {
+    &bg- {
+      .for(@colors);
+      .-each(@value) {
+        @name: extract(@value, 1);
+        &@{name} {
+          &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            background-color: extract(@value, 2);
+            opacity: 0.4;
+          }
+        }
+      }
+    }
+  }
+  > * {
+    z-index: 50;
+    position: relative;
+    color: white;
+  }
+
+  &.default {
+    min-height: 440px;
+    @media (min-width: 1200px) {
+      min-height: 555px;
+    }
+  }
+
+  .bgimageitem {
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transform: translateY(-50%);
+
+    &.parallax {
+      transform: translateY(0);
+    }
+  }
+}
+.border {
+  &-top {
+    &-green {
+      border-top: 3px solid @green;
+    }
+  }
+}
+
+h1 {
+  font-family: "Bree Serif", serif;
+}
+h2, .h2 {
+  font-family: "Titillium Web", sans-serif;
+}
+p {
+  font-family: "Titillium Web", sans-serif;
+}
+main a,
+footer a {
+  color: @green;
+  &:hover,
+  &:focus {
+    color: @green;
+    text-decoration:underline;
+  }
+  &:active,
+  &:visited {
+    color: @green;
+  }
+}
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  background-color:@green;
+}
+.carousel-indicators li {
+  background-color:@blue;
+}
+.carousel {
+  &:focus {
+    outline:0;
+  }
+}
+.accordion .accordion-toggle {
+  &:after {
+    font-family: 'FontAwesome';
+    content: "\f068";
+    float: right;
+  }
+  &.collapsed:after {
+    content: "\f067";
+  }
+}
+.panel {
+  border-bottom: 3px solid @green;
+}

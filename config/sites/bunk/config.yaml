@@ -1,0 +1,27 @@
+base: 'https://www.bunk-gartenbau.de/'
+baseVariants:
+  -
+    base: 'http://local.bunk-gartenbau.de'
+    condition: 'getenv("TYPO3_CONTEXT") == "Development"'
+errorHandling:
+  -
+    errorCode: '404'
+    errorHandler: Page
+    errorContentSource: 't3://page?uid=15'
+languages:
+  -
+    title: Deutsch
+    enabled: true
+    languageId: '0'
+    base: /
+    typo3Language: de
+    locale: de_DE.UTF-8
+    iso-639-1: de
+    navigationTitle: German
+    hreflang: de-de
+    direction: ltr
+    flag: de
+    websiteTitle: ''
+rootPageId: 1
+routes: {  }
+websiteTitle: ''
