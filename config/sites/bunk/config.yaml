@@ -1,4 +1,4 @@
-base: 'https://www.bunk-gartenbau.de/'
+base: 'http://6232711797541.hostingkunde.de/'
 baseVariants:
   -
     base: 'http://local.bunk-gartenbau.de'

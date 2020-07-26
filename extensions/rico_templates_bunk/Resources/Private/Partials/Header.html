@@ -1,58 +1,85 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
-      data-namespace-typo3-fluid="true">
-    <header id="head">
+<html data-namespace-typo3-fluid="true"
+      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+    <header class="clbg-blue border-bottom-green" id="head">
         <div class="container">
             <div class="row">
                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                     <div class="navbar-header navbar-expand-lg">
-                        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                                data-target="#navwrap" aria-controls="navbarsExampleDefault" aria-expanded="false"
-                                aria-label="Toggle navigation">
+                        <button aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation"
+                                class="navbar-toggler collapsed float-right mr-2 mt-3" data-target="#navwrap" data-toggle="collapse"
+                                type="button">
                             <span class="icon-bar top-bar"></span>
                             <span class="icon-bar middle-bar "></span>
                             <span class="icon-bar bottom-bar"></span>
                         </button>
                         <f:if condition="{logoPath}">
-                            <div itemscope itemtype="http://schema.org/Organization">
-                                <f:link.typolink parameter="{rootPageUid}" additionalAttributes="{'itemprop':'url'}">
-                                    <f:image src="{logoPath}"
-                                             width="120m"
+                            <div class="logowrap" itemscope itemtype="http://schema.org/Organization">
+                                <f:link.typolink additionalAttributes="{'itemprop':'url'}" parameter="{rootPageUid}">
+                                    <f:image alt="Bunk Ihr Partner für Grün GmbH "
                                              class="logo img img-fluid"
-                                             alt="Bunk Ihr Partner für Grün GmbH " />
+                                             src="{logoPath}"
+                                             width="120m" />
                                 </f:link.typolink>
                                 <f:if condition="{sloganPath}">
-                                    <f:image src="{sloganPath}"
-                                             class="slogan img img-fluid"
-                                             alt="Bunk Ihr Partner für Grün GmbH" />
+                                    <f:image alt="Bunk Ihr Partner für Grün GmbH"
+                                             class="slogan img img-fluid d-none d-lg-block"
+                                             src="{sloganPath}" />
                                 </f:if>
                             </div>
                         </f:if>
                     </div>
                 </div>
                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-                    <nav id="nav" class="navbar navbar-expand-lg" itemscope
+                    <nav class="navbar navbar-expand-lg" id="nav" itemscope
                          itemtype="http://schema.org/SiteNavigationElement">
                         <div class="collapse navbar-collapse" id="navwrap">
                             <ul class="nav navbar-nav nav-tabs">
-                                <f:for each="{mainNavigation}" as="menu">
-                                    <li class="nav-item dropdown l1 layout-{menu.layout}" itemprop="name">
-                                        <a class="col-md-9 col-sm-9 col-9"
-                                           href="{menu.link}"
-                                           {f:if(condition:menu.target,then: 'target="{menu.target}"')}
-                                        itemprop="url"
-                                        title="{menu.title}">
-                                        {menu.title}
-                                        </a>
-                                    </li>
+                                <f:for as="menu" each="{mainNavigation}">
+                                    <f:if condition="{menu.children}">
+                                        <f:then>
+                                            <li class="nav-item dropdown l1 layout-0 hassub">
+                                                <a class="dropdown-toggle p-2 d-block" data-toggle="dropdown" href="#"
+                                                   target="_self" title="{menu.title}">{menu.title}</a>
+                                                <ul class="dropdown-menu lvl2" role="menu">
+                                                    <f:for as="submenu" each="{menu.children}">
+                                                        <li>
+                                                            <a href="{submenu.link}"
+                                                               {f:if(condition:submenu.target,then:
+                                                            'target="{submenu.target}"')}
+                                                            itemprop="url"
+                                                            title="{submenu.title}">
+                                                            <div class="col-lg-12 menuitm">
+                                                                <span>{submenu.title}</span>
+                                                            </div>
+                                                            </a>
+                                                        </li>
+                                                    </f:for>
+                                                </ul>
+                                            </li>
+                                        </f:then>
+                                        <f:else>
+                                            <li class="nav-item l1 layout-0" itemprop="name">
+                                                <a class="p-2 d-block"
+                                                    href="{menu.link}"
+                                                   {f:if(condition:menu.target,then: 'target="{menu.target}"')}
+                                                itemprop="url"
+                                                title="{menu.title}">
+                                                {menu.title}
+                                                </a>
+                                            </li>
+                                        </f:else>
+                                    </f:if>
                                 </f:for>
                             </ul>
                         </div>
                     </nav>
+
                 </div>
             </div>
         </div>
     </header>
-    <f:variable name="headercontent" value="{f:cObject(typoscriptObjectPath: 'lib.dynamicContent',data: '{colPos: \'1\'}')}" />
+    <f:variable name="headercontent"
+                value="{f:cObject(typoscriptObjectPath: 'lib.dynamicContent',data: '{colPos: \'1\',slide: \'-1\'}')}" />
     <f:if condition="{headercontent}">
         <div class="head-content">
             {headercontent -> f:format.raw()}

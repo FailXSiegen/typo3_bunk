@@ -246,6 +246,10 @@ TCEFORM {
 
         frame_class {
             removeItems = ruler-before,ruler-after,indent,indent-left,indent-right
+            addItems {
+                clbg-blue = Blauer Hintergrund
+                clbg-green = Grüner Hintergrund
+            }
         }
 
         space_before_class {
