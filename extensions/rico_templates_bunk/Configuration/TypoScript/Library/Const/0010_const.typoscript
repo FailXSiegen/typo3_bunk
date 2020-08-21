@@ -26,3 +26,14 @@ page {
         templateRootPath = EXT:rico_templates_bunk/Resources/Private/Templates/Page/
     }
 }
+plugin.tx_ricotemplates_bunk.settings.rootPageUid = 1
+plugin.tx_ricotemplates_bunk.settings.mainNavPageUid = 2
+plugin.tx_ricotemplates_bunk.settings.footerNavPageUid = 4
+plugin.tx_ricotemplates_bunk.settings.logoPath = /fileadmin/user_upload/logo.png
+plugin.tx_ricotemplates_bunk.settings.sloganPath = /fileadmin/user_upload/bunkslogan.png
+styles.content.textmedia.maxW = 1920
+styles.content.textmedia.maxWInText = 1920
+styles.content.textmedia.linkWrap.width = 1200m
+styles.content.textmedia.linkWrap.height = 800m
+styles.content.textmedia.linkWrap.lightboxEnabled = 1
+styles.content.textmedia.linkWrap.lightboxCssClass = lightbox

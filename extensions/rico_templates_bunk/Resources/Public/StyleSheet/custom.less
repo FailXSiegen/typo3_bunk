@@ -206,6 +206,7 @@ footer a {
     a {
       color: @green;
       text-transform: uppercase;
+      white-space: nowrap;
       &:focus,
       &:active,
       &:hover {
@@ -215,6 +216,12 @@ footer a {
   }
 }
 .head-content {
+  > .frame-type-header {
+    max-width: 610px;
+    h1 {
+      margin-top: 20px;
+    }
+  }
   .bgimage {
     display: -ms-flexbox!important;
     display: flex!important;
@@ -315,4 +322,22 @@ footer {
     transform: rotate(-45deg) translateX(3px);
     transform-origin: 14% 10%;
   }
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu a::after {
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 6px;
+  top: 1.2em;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: .1rem;
+  margin-right: .1rem;
 }

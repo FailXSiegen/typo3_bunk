@@ -1,25 +1,32 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       data-namespace-typo3-fluid="true">
-    <div id="c{data.uid}" data-interval="false" class="carousel bootstrap-slider slide {f:render(partial:'Divclasses',arguments:'{data: data}')}">
-        <div class="carousel-inner" role="listbox">
-            <f:for each="{children.1.101}" as="item" iteration="iterator">
-                <div class="carousel-item  {f:if(condition:iterator.isFirst, then:'active')}">
-                    <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos:'-1',pageUid:'{item.data.pid}',contentUids:'{item.data.uid}'}" />
-                </div>
-            </f:for>
-        </div>
-        <a class="carousel-control-prev" href="#c{data.uid}" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#c{data.uid}" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-        <ol class="carousel-indicators">
-            <f:for each="{children.1.101}" as="item" iteration="iterator">
-                <li data-target="#c{data.uid}" data-slide-to="{iterator.index}" class="{f:if(condition:iterator.isFirst, then:'active')}"></li>
-            </f:for>
-        </ol>
+    <div id="c{data.uid}"
+         data-md-autoplay="{f:if(condition:data.flexform_md-autoplay,then:'true',else:'false')}"
+         data-md-loop="{f:if(condition:data.flexform_md-loop,then:'true',else:'false')}"
+         data-md-navarrows="{f:if(condition:data.flexform_md-navarrows,then:'true',else:'false')}"
+         data-md-mousedrag="{f:if(condition:data.flexform_md-mousedrag,then:'true',else:'false')}"
+         data-md-dots="{f:if(condition:data.flexform_md-dots,then:'true',else:'false')}"
+         data-md-stagepadding="{data.flexform_md-stagepadding}"
+         data-sm-autoplay="{f:if(condition:data.flexform_sm-autoplay,then:'true',else:'false')}"
+         data-sm-loop="{f:if(condition:data.flexform_sm-loop,then:'true',else:'false')}"
+         data-sm-navarrows="{f:if(condition:data.flexform_sm-navarrows,then:'true',else:'false')}"
+         data-sm-mousedrag="{f:if(condition:data.flexform_sm-mousedrag,then:'true',else:'false')}"
+         data-sm-dots="{f:if(condition:data.flexform_sm-dots,then:'true',else:'false')}"
+         data-sm-stagepadding="{data.flexform_sm-stagepadding}"
+         data-autoplay="{f:if(condition:data.flexform_autoplay,then:'true',else:'false')}"
+         data-loop="{f:if(condition:data.flexform_loop,then:'true',else:'false')}"
+         data-navarrows="{f:if(condition:data.flexform_navarrows,then:'true',else:'false')}"
+         data-mousedrag="{f:if(condition:data.flexform_mousedrag,then:'true',else:'false')}"
+         data-dots="{f:if(condition:data.flexform_dots,then:'true',else:'false')}"
+         data-stagepadding="{data.flexform_stagepadding}"
+         data-defaultitemcount="{data.flexform_defaultItemCount}"
+         data-tabletitemcount="{data.flexform_tabletItemCount}"
+         data-mobileitemcount="{data.flexform_mobileItemCount}"
+         class="{f:if(condition: '{data.flexform_vertical-slide}',then:'vertical-slider',else:'content-slider')} owl-carousel owl-theme {data.flexform_md-rowClasses} {data.flexform_sm-rowClasses} {data.flexform_rowClasses} {f:render(partial:'Divclasses',arguments:'{data: data}')}">
+        <f:for each="{children.1.101}" as="item" iteration="iterator">
+            <div class="item {f:if(condition:iterator.isFirst, then:'active')}">
+                <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos:'-1',pageUid:'{item.data.pid}',contentUids:'{item.data.uid}'}" />
+            </div>
+        </f:for>
     </div>
 </html>

@@ -401,11 +401,18 @@ footer a:visited {
 #head .lvl2 a {
   color: #00894f;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 #head .lvl2 a:focus,
 #head .lvl2 a:active,
 #head .lvl2 a:hover {
   color: #00894f;
+}
+.head-content > .frame-type-header {
+  max-width: 610px;
+}
+.head-content > .frame-type-header h1 {
+  margin-top: 20px;
 }
 .head-content .bgimage {
   display: -ms-flexbox !important;
@@ -491,5 +498,20 @@ footer .frame-type-menu_subpages ul li a:hover {
 .navbar-toggler .bottom-bar {
   transform: rotate(-45deg) translateX(3px);
   transform-origin: 14% 10%;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu a::after {
+  transform: rotate(-90deg);
+  position: absolute;
+  right: 6px;
+  top: 1.2em;
+}
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-left: 0.1rem;
+  margin-right: 0.1rem;
 }
 /*# sourceMappingURL=custom.css.map */

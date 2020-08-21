@@ -42,17 +42,40 @@
                                                    target="_self" title="{menu.title}">{menu.title}</a>
                                                 <ul class="dropdown-menu lvl2" role="menu">
                                                     <f:for as="submenu" each="{menu.children}">
-                                                        <li>
-                                                            <a href="{submenu.link}"
-                                                               {f:if(condition:submenu.target,then:
-                                                            'target="{submenu.target}"')}
-                                                            itemprop="url"
-                                                            title="{submenu.title}">
-                                                            <div class="col-lg-12 menuitm">
-                                                                <span>{submenu.title}</span>
-                                                            </div>
-                                                            </a>
-                                                        </li>
+                                                        <f:if condition="{submenu.children}">
+                                                            <f:then>
+                                                                <li class="nav-item dropdown-submenu l2 layout-0 hassub">
+                                                                    <a class="dropdown-toggle p-2 d-block" data-toggle="dropdown" href="#"
+                                                                       target="_self" title="{submenu.title}">{submenu.title}</a>
+                                                                    <ul class="dropdown-menu lvl3" role="menu">
+                                                                    <f:for as="subsubmenu" each="{submenu.children}">
+                                                                        <li>
+                                                                            <a href="{subsubmenu.link}"
+                                                                               class="p-2 d-block"
+                                                                               {f:if(condition:subsubmenu.target,then:
+                                                                            'target="{subsubmenu.target}"')}
+                                                                            itemprop="url"
+                                                                            title="{subsubmenu.title}">
+                                                                                {subsubmenu.title}
+                                                                            </a>
+                                                                        </li>
+                                                                    </f:for>
+                                                                    </ul>
+                                                                </li>
+                                                            </f:then>
+                                                            <f:else>
+                                                                <li class="nav-item">
+                                                                    <a href="{submenu.link}"
+                                                                       class="p-2 d-block"
+                                                                       {f:if(condition:submenu.target,then:
+                                                                    'target="{submenu.target}"')}
+                                                                    itemprop="url"
+                                                                    title="{submenu.title}">
+                                                                    {submenu.title}
+                                                                    </a>
+                                                                </li>
+                                                            </f:else>
+                                                        </f:if>
                                                     </f:for>
                                                 </ul>
                                             </li>

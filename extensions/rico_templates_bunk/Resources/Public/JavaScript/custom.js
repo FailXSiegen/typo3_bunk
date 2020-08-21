@@ -1,5 +1,10 @@
 var animationObject
-
+$(window).resize(function (event) {
+  $('.content-slider').each(function () {
+    $(this).trigger('destroy.owl.carousel')
+    initializeOwlCarousel($(this))
+  })
+})
 $(window).on('load', function () {
   animationObject = $('.animatecss')
   addAnimations()
@@ -9,6 +14,28 @@ $(window).scroll(function () {
   addAnimations()
 })
 $(function () {
+  $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+    if (!$(this).next().hasClass('show')) {
+      $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+    }
+    var $subMenu = $(this).next('.dropdown-menu');
+    $subMenu.toggleClass('show');
+
+
+    $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+      $('.dropdown-submenu .show').removeClass('show');
+    });
+
+
+    return false;
+  });
+  $('.lightbox').fancybox();
+  $('.content-slider').each(function () {
+    initializeOwlCarousel($(this))
+  })
+  $('.vertical-slider').each(function () {
+    initializeOwlCarousel($(this))
+  })
   $('.count').each(function () {
     let $this = $(this)
     $this.inViewport(function (px) {
@@ -98,3 +125,37 @@ $(function ($, win) {
     })
   }
 }(jQuery, window))
+
+
+
+function initializeOwlCarousel (item) {
+  item.owlCarousel({
+    responsive: {
+      0: {
+        items: item.data('mobileitemcount'),
+        loop: item.data('loop'),
+        dots: item.data('dots'),
+        nav: item.data('navarrows'),
+        mouseDrag: item.data('mousedrag'),
+        stagePadding: item.data('stagepadding')
+      },
+      768: {
+        items: item.data('tabletitemcount'),
+        loop: item.data('sm-loop'),
+        dots: item.data('sm-dots'),
+        nav: item.data('sm-navarrows'),
+        mouseDrag: item.data('sm-mousedrag'),
+        stagePadding: item.data('sm-stagepadding')
+      },
+      992: {
+        items: item.data('defaultitemcount'),
+        loop: item.data('md-loop'),
+        dots: item.data('md-dots'),
+        nav: item.data('md-navarrows'),
+        mouseDrag: item.data('md-mousedrag'),
+        stagePadding: item.data('md-stagepadding')
+      }
+    }
+  })
+
+}

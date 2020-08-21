@@ -114,6 +114,7 @@ tx_gridelements.setup {
                 }
             }
         }
+        flexformDS = FILE:EXT:rico_templates_bunk/Configuration/FlexForm/flexform_contentwrapper.xml
     }
 
     contentslider {
@@ -132,7 +133,7 @@ tx_gridelements.setup {
                 }
             }
         }
-
+        flexformDS = FILE:EXT:rico_templates_bunk/Configuration/FlexForm/flexform_contentslider.xml
     }
 
     2cols {

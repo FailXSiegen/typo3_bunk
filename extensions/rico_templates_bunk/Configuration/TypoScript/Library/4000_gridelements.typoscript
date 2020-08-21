@@ -18,7 +18,7 @@ lib.gridelements.defaultGridSetup {
     }
 
     dataProcessing {
-        10 = Riconet\RicoTemplatesBunk\DataProcessing\GridChildrenProcessor
+        10 = GridElementsTeam\Gridelements\DataProcessing\GridChildrenProcessor
         10 {
             default {
                 as = children

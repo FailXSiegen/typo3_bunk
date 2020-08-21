@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+    <meta>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT type="array">
+                <TCEforms>
+                    <sheetTitle>Optionen</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el type="array">
+                    <textcolor type="array">
+                        <TCEforms type="array">
+                            <label>Schriftfarbe</label>
+                            <config type="array">
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">CSS Standard</numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">Schwarz</numIndex>
+                                        <numIndex index="1">clfo-black</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">Weiß</numIndex>
+                                        <numIndex index="1">clfo-white</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3" type="array">
+                                        <numIndex index="0">Blau</numIndex>
+                                        <numIndex index="1">clfo-blue</numIndex>
+                                    </numIndex>
+                                    <numIndex index="4" type="array">
+                                        <numIndex index="0">Grün</numIndex>
+                                        <numIndex index="1">clfo-green</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </textcolor>
+
+                    <rowClasses type="array">
+                        <TCEforms type="array">
+                            <label>LLL:EXT:rico_templates_compleo/Resources/Private/Language/locallang_db.xlf:grid.label.row</label>
+                            <config type="array">
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">Inhalt Ausrichtung Oben (Default)</numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">Inhalt Ausrichtung Mitte</numIndex>
+                                        <numIndex index="1">align-items-center</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">Inhalt Ausrichtung unten</numIndex>
+                                        <numIndex index="1">align-items-end</numIndex>
+                                    </numIndex>
+                                </items>
+
+                            </config>
+                        </TCEforms>
+                    </rowClasses>
+                    <maxWidthContent type="array">
+                        <TCEforms type="array">
+                            <label>Breite des Inhalts Begrenzen</label>
+                            <config type="array">
+                                <type>select</type>
+                                <renderType>selectSingle</renderType>
+                                <items type="array">
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">Keine Begrenzung</numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1" type="array">
+                                        <numIndex index="0">80%</numIndex>
+                                        <numIndex index="1">w-max-80</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2" type="array">
+                                        <numIndex index="0">60%</numIndex>
+                                        <numIndex index="1">w-max-60</numIndex>
+                                    </numIndex>
+                                </items>
+
+                            </config>
+                        </TCEforms>
+                    </maxWidthContent>
+                </el>
+            </ROOT>
+        </sDEF>
+    </sheets>
+</T3DataStructure>
